@@ -1,0 +1,48 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:5.4.3
+    volumes:
+      - ./grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    ports:
+    - "3000:3000"
+    depends_on:
+    - prom
+  prom:
+    image: prom/prometheus:v2.6.1
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/prometheus
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+    - 9090:9090
+    depends_on:
+    - app-bookstore
+  fontend-bookstore:
+   build:
+      dockerfile: Dockerfile
+      context: ./frontend
+   restart: always
+   ports:
+   - 8090:80
+   - 443:443
+   depends_on:
+   - app-bookstore
+
+  app-bookstore:
+    restart: always
+    environment:
+      - DATASOURCE_URL=mongodb+srv://mutual:mutual2019@bookstore-dzhwi.mongodb.net/test?retryWrites=true&w=majority
+      - DATASOURCE_NAME=bookstore
+    build: ./bookstore
+    working_dir: /app
+    volumes:
+      - ./bookstore:/app
+      # - ~/.m2:/root/.m2
+    expose:
+      - "8080"
+    command: mvn -Pprod clean spring-boot:run
+  

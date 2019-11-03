@@ -1,0 +1,23 @@
+.item-book{
+    padding: 0;
+}
+.list-group-item {
+    margin-top: 15px ;
+    padding: 0;
+}
+.media {
+    padding: 0;
+}
+img{
+    border-right: 1px solid #ccc;
+}
+.action-element{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffc00857
+}
+.inline-block-el{
+    display: inline-block;
+}

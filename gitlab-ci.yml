@@ -1,0 +1,57 @@
+image: maven:3.6.2-jdk-8
+cache:
+  key: '$CI_COMMIT_REF_NAME'
+  paths:
+    - .maven/
+stages:
+  - build
+  - test
+  - analyze
+  - package
+  - release
+  - deploy
+before_script:
+  - export MAVEN_USER_HOME=`pwd`/.maven
+  - ./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-npm -DnodeVersion=v10.16.1 -DnpmVersion=6.9.2 -Dmaven.repo.local=$MAVEN_USER_HOME
+  - ./mvnw com.github.eirslett:frontend-maven-plugin:npm -Dmaven.repo.local=$MAVEN_USER_HOME
+
+maven-compile:
+  stage: build
+  script:
+    - cd bookstore
+    - ./mvnw compile -Dmaven.repo.local=$MAVEN_USER_HOME
+  artifacts:
+    paths:
+      - bookstore/target/classes/
+      - bookstore/target/generated-sources/
+    expire_in: 1 day
+
+backend-test:
+   stage: test
+   script:
+    - cd bookstore
+    - ./mvnw verify -Dmaven.repo.local=$MAVEN_USER_HOME
+   artifacts:
+       reports:
+           junit: bookstore/target/test-results/**/TEST-*.xml
+       paths:
+           - target/test-results
+       expire_in: 1 day
+frontend-test:
+  stage: test
+  script:
+    - cd frontend
+    - npm run test
+maven-package:
+  stage: package
+  script:
+    - cd bookstore
+    - ./mvnw verify -Pprod -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
+  artifacts:
+    paths:
+      - target/*.jar
+      - target/classes
+    expire_in: 1 day
+
+
+

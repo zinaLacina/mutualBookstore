@@ -1,0 +1,17 @@
+{
+	"ulid": "01DRSJ3PCT95C1E82WVMSR1JAF",
+	"minTime": 1572804000000,
+	"maxTime": 1572811200000,
+	"stats": {
+		"numSamples": 1348,
+		"numSeries": 674,
+		"numChunks": 674
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01DRSJ3PCT95C1E82WVMSR1JAF"
+		]
+	},
+	"version": 1
+}
