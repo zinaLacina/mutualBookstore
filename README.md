@@ -10,20 +10,41 @@ The application uses the microservice technology, we have Nginx proxy, frontend,
  **Nginx proxy** is to avoid the user to directly access to the backend. It is for security purposes. It will reduce the DDoS attacks.
  **Grafana and Prometheus** do the monitoring of the application.
  
-# Application architecture
+# APPLICATION ARCHITECTURE
   ![Architecture](https://github.com/zinaLacina/mutualBookstore/blob/master/bookstoremutual.png)
 
-# Backend
+# BACKEND
 
-Introduction here
+The backend uses spring boot technologies. It uses Maven to execute and resolve dependencies management.
 
-## Diagram
-
-  
+## Mongo Database structure
+![Database structure](https://github.com/zinaLacina/mutualBookstore/blob/master/classDiagram.png)
 
 ## Security
+The application uses Spring security combine with JWT to secure access of the data. To bookmark a book, you need to be login first. The application will create a token that will last 30 seconds. The creation of the token is managed by the class JwtTokenProvider.java
 
+    public String generateToken(Authentication authentication){  
+    UserBookstore user = (UserBookstore)authentication.getPrincipal();  
   
+    Date now = new Date(System.currentTimeMillis());  
+      
+      Date expiryDate = new Date(now.getTime()+EXPIRATION_TIME);  
+      
+      String userId = user.getId();  
+      
+      Map<String,Object> claims = new HashMap<>();  
+      claims.put("id", (user.getId()));  
+      claims.put("username", user.getUsername());  
+      claims.put("fullName", user.getFullName());  
+      
+     return Jwts.builder()  
+                .setSubject(userId)  
+                .setClaims(claims)  
+                .setIssuedAt(now)  
+                .setExpiration(expiryDate)  
+                .signWith(SignatureAlgorithm.HS512, SECRET)  
+                .compact();  
+    }
 
 ## Code
 
@@ -34,8 +55,8 @@ Introduction here
   
   
 
-# Frontend
-
+# FRONTEND
+The frontend of the application using React combined with Redux, Axios to retrieve, provide, and display the data to the end-user.
   
   
 
@@ -48,13 +69,13 @@ Introduction here
 
   
 
-## JWT WEB TOKEN
+## Jwt web token
 
   
-  
-  
+ 
+  # NGINX PROXY
 
-# Deployment
+# DEPLOYMENT
 
   
   
