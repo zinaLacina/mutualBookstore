@@ -14,7 +14,7 @@ The application uses the microservice technology, we have Nginx proxy, frontend,
  - [Frontend](#frontend)
  - [Deployment locally and online](#deployment)
 
-
+This is a temporary link I will deploy a multi Docker on ECS with a configuration of Grafana, Cloudwatch [http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/](http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/)
  
 # APPLICATION ARCHITECTURE
   ![Architecture](https://github.com/zinaLacina/mutualBookstore/blob/master/bookstoremutual.png)
@@ -162,7 +162,7 @@ Prometheus link is
 localhost:9090
 ```
    
-Grafana link is
+Grafana link is Credentials username **admin** and password **pasword**
 
 ```bash
 localhost:3000
@@ -176,8 +176,8 @@ During the **CI-CD** creation, this value will be added from the environment var
 - If you are using **Travis ci** put go to setting and then variables.
 
 ## Deploy on aws
-
-  
+This is a temporary link I will deploy a multi Docker on ECS with a configuration of Grafana, Cloudwatch
+[http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/](http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/)
   
 
 ## CI-CD
