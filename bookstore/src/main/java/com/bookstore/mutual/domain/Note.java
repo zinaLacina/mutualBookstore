@@ -1,11 +1,14 @@
 package com.bookstore.mutual.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
 
 @Data
 @Builder
@@ -20,5 +23,8 @@ public class Note {
 
     private String authorid;
 
-    private String created_at;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date createdAt;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date updatedAt;
 }

@@ -36,7 +36,7 @@ public class UserBookstore implements UserDetails {
     String phone;
     private boolean enabled;
 
-    List<Bookmark> userReviews;
+    List<Bookmark> userBookmark;
 
 
     /*
