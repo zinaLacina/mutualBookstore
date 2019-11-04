@@ -19,6 +19,8 @@ The backend uses spring boot technologies. It uses Maven to execute and resolve 
 
 ## Mongo Database structure
 ![Database structure](https://github.com/zinaLacina/mutualBookstore/blob/master/classDiagram.png)
+## Spring profile
+We have two different profiles for the application. Dev profile for the development, and Prod profile for the production.
 
 ## Security
 The application uses Spring security combine with JWT to secure access of the data. To bookmark a book, you need to be login first. The application will create a token that will last 30 seconds. The creation of the token is managed by the class JwtTokenProvider.java
@@ -90,6 +92,9 @@ _JSON Web Token_ is an Internet standard for creating JSON-based access tokens t
  ![JWT Decode interface](https://github.com/zinaLacina/mutualBookstore/blob/master/jwtEncode.png)
  
   # NGINX PROXY
+Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache. The software was created by Igor Sysoev and first publicly released in 2004. A company of the same name was founded in 2011 to provide support and Nginx plus paid software( *wikipedia* ).
+I use Nginx to limit users to access directly to the API. It reduces DDoS attacks. Please have a look at the configuration in nginx.conf file inside the frontend folder.
+![NGinx conf](https://github.com/zinaLacina/mutualBookstore/blob/master/nginxconf.png)
 
 # DEPLOYMENT
 
@@ -98,9 +103,8 @@ _JSON Web Token_ is an Internet standard for creating JSON-based access tokens t
 
 ## Run locally
 
-  
 
-### With one command line (docker compose)
+### With with docker compose
 
 You can change the port of **8090** inside the docker-compose file at the line **30**.  Open your terminal, place you, in your favorite directory then run.
    
@@ -120,7 +124,7 @@ Then wait a few seconds(30 seconds) to let the spring app starts then type on yo
 
     http://localhost:8090/
 
-### Normal run
+### Run separately
 Open your terminal, place you, in your favorite directory then run.
 
      git clone https://github.com/zinaLacina/mutualBookstore.git
