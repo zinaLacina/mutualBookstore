@@ -87,6 +87,7 @@ The different state I store is found in the following code located in the src/re
 ## Jwt web token
 _JSON Web Token_ is an Internet standard for creating JSON-based access tokens that assert some number of claims.
  I used the framework jwt decode to decode the encoded value. You can find the example here.
+ ![JWT Decode interface](https://github.com/zinaLacina/mutualBookstore/blob/master/jwtEncode.png)
  
   # NGINX PROXY
 
