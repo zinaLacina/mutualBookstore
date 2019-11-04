@@ -24,21 +24,16 @@ We have two different profiles for the application. Dev profile for the developm
 
 ## Security
 The application uses Spring security combine with JWT to secure access of the data. To bookmark a book, you need to be login first. The application will create a token that will last 30 seconds. The creation of the token is managed by the class JwtTokenProvider.java
-
-    public String generateToken(Authentication authentication){  
+```java
+public String generateToken(Authentication authentication){  
     UserBookstore user = (UserBookstore)authentication.getPrincipal();  
-  
     Date now = new Date(System.currentTimeMillis());  
-      
       Date expiryDate = new Date(now.getTime()+EXPIRATION_TIME);  
-      
       String userId = user.getId();  
-      
       Map<String,Object> claims = new HashMap<>();  
       claims.put("id", (user.getId()));  
       claims.put("username", user.getUsername());  
-      claims.put("fullName", user.getFullName());  
-      
+      claims.put("fullName", user.getFullName());    
      return Jwts.builder()  
                 .setSubject(userId)  
                 .setClaims(claims)  
@@ -47,6 +42,7 @@ The application uses Spring security combine with JWT to secure access of the da
                 .signWith(SignatureAlgorithm.HS512, SECRET)  
                 .compact();  
     }
+```
 
 ## Exceptions management
 I create my own exceptions management to make more powerful the application likes:
@@ -76,14 +72,14 @@ React uses JSX and a virtual dom that makes it very fast. I use the last version
 ## Redux
 Redux is an open-source JavaScript library for managing application state. It is most commonly used with libraries such as React or Angular for building user interfaces. Similar to Facebook's Flux architecture, it was created by Dan Abramov and Andrew Clark.( *wikipedia* )
 The different state I store is found in the following code located in the src/reducers/index.js
-
-    export  default  combineReducers({
-	    errors:  errorReducer,
-	    books:  bookReducer,
-	    bookmark:  bookmarkReducer,
-	    security:  securityReducer
-    });
-
+```javascript
+export  default  combineReducers({
+    errors:  errorReducer,
+    books:  bookReducer,
+    bookmark:  bookmarkReducer,
+    security:  securityReducer
+ });
+```
   
 
 ## Jwt web token
@@ -107,18 +103,19 @@ I use Nginx to limit users to access directly to the API. It reduces DDoS attack
 ### With with docker compose
 
 You can change the port of **8090** inside the docker-compose file at the line **30**.  Open your terminal, place you, in your favorite directory then run.
-   
-
-     git clone https://github.com/zinaLacina/mutualBookstore.git
+   ```bash
+   git clone https://github.com/zinaLacina/mutualBookstore.git
+   ```
 
 After place your in the folder mutualBookstore by typing.
-   
-
-     cd mutualBookstore
+   ```bash
+   cd mutualBookstore
+   ```
 
 Then run the following command
-
-    docker-compose up -d --build
+```bash 
+docker-compose up -d --build
+```
 
 Then wait a few seconds(30 seconds) to let the spring app starts then type on your browser.
 
@@ -126,28 +123,32 @@ Then wait a few seconds(30 seconds) to let the spring app starts then type on yo
 
 ### Run separately
 Open your terminal, place you, in your favorite directory then run.
-
-     git clone https://github.com/zinaLacina/mutualBookstore.git
+ ```bash
+   git clone https://github.com/zinaLacina/mutualBookstore.git
+   ```
 
 After place your in the folder mutualBookstore by typing.
-
-    cd mutualBookstore/bookstore
-
+```bash
+cd mutualBookstore/bookstore
+```
 For the normal run, you need to open two tab or window of your terminal.
 Inside the first terminal please type
-
-    ./mvnw clean spring-boot:run
+```bash 
+./mvnw clean spring-boot:run
+```
 In the other terminal run the following commands:
-
-    cd frontend
-    yarn install 
-    yarn start
+```bash
+cd frontend
+yarn install 
+yarn start
+```
 
 if you are using npm run
-
-    cd frontend
-    npm install 
-    npm start
+```bash
+cd frontend
+npm install 
+npm start
+```
 Then you can access to the application in the link below
 [http://localhost:3000/](http://localhost:3000/)
 ## Monitoring
