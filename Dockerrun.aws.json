@@ -1,0 +1,118 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+          "name": "grafana-app",
+          "host": {
+            "sourcePath": "/var/app/current/grafana-app"
+          }
+        },
+        {
+            "name": "prometheus-app",
+            "host": {
+              "sourcePath": "/var/app/current/prometheus-app"
+            }
+        },
+        {
+            "name": "nginx-proxy-conf",
+            "host": {
+              "sourcePath": "/var/app/current/proxy/conf.d"
+            }
+        },
+        {
+            "name": "prometheus-conf",
+            "host": {
+              "sourcePath": "/var/app/current/proxy/prometheus-conf"
+            }
+        }
+    ],
+    "containerDefinitions": [
+      {
+        "name": "grafana",
+        "image": "grafana/grafana:5.4.3",
+        "hostname": "client",
+        "environment": [
+            {
+              "name": "GF_SECURITY_ADMIN_USER",
+              "value": "admin"
+            },
+            {
+                "name": "GF_SECURITY_ADMIN_PASSWORD",
+                "value": "password"
+            }
+        ],
+        "mountPoints": [
+            {
+              "sourceVolume": "prometheus-app",
+              "containerPath": "/prometheus",
+              "readOnly": false
+            },
+            {
+                "sourceVolume": "prometheus-conf",
+                "containerPath": "/etc/prometheus/prometheus.yml",
+                "readOnly": true
+              }
+        ],
+        "essential": false,
+        "memory": 128,
+        "links": ["prom"]
+      },
+      {
+        "name": "prom",
+        "image": "prom/prometheus:v2.6.1",
+        "hostname": "prom",
+        "mountPoints": [
+            {
+              "sourceVolume": "grafana-app",
+              "containerPath": "/var/lib/grafana",
+              "readOnly": false
+            }
+        ],
+        "essential": false,
+        "memory": 128,
+        "links": ["app-bookstore"]
+      },
+      {
+        "name": "app-bookstore",
+        "image": "zinalacina/bookstorebackend",
+        "hostname": "app-bookstore",
+        "environment": [
+            {
+              "name": "DATASOURCE_URL",
+              "value": "mongodb+srv://mutual:mutual2019@bookstore-dzhwi.mongodb.net/test?retryWrites=true&w=majority"
+            },
+            {
+                "name": "DATASOURCE_NAME",
+                "value": "bookstore"
+              }
+        ],
+        "essential": false,
+        "memory": 128
+      },
+      {
+        "name": "fontend-bookstore",
+        "image": "zinalacina/bookstorefrontend",
+        "hostname": "fontend-bookstore",
+        "essential": true,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "containerPort": 80
+          }
+        ],
+        "links": ["app-bookstore"],
+        "memory": 128,
+        "mountPoints": [
+            {
+              "sourceVolume": "nginx-proxy-conf",
+              "containerPath": "/etc/nginx/conf.d",
+              "readOnly": true
+            },
+            {
+              "sourceVolume": "awseb-logs-nginx-proxy",
+              "containerPath": "/var/log/nginx"
+            }
+          ]
+      }
+    ]
+  }
