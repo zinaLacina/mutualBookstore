@@ -8,7 +8,13 @@ The application uses the microservice technology, we have Nginx proxy, frontend,
  **The frontend** uses:
  *React, Redux, bootstrap 4, Axios, JWT, Node.*
  **Nginx proxy** is to avoid the user to directly access to the backend. It is for security purposes. It will reduce the DDoS attacks.
- **Grafana and Prometheus** do the monitoring of the application.
+ **Grafana and Prometheus** do the monitoring of the application. 
+ - [Application architecture](#application-architecture)
+ - [Backend](#backend)
+ - [Frontend](#frontend)
+ - [Deployment locally and online](#deployment)
+
+
  
 # APPLICATION ARCHITECTURE
   ![Architecture](https://github.com/zinaLacina/mutualBookstore/blob/master/bookstoremutual.png)
@@ -94,8 +100,6 @@ I use Nginx to limit users to access directly to the API. It reduces DDoS attack
 
 # DEPLOYMENT
 
-  
-  
 
 ## Run locally
 
