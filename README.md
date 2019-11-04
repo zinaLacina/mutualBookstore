@@ -46,13 +46,19 @@ The application uses Spring security combine with JWT to secure access of the da
                 .compact();  
     }
 
-## Code
+## Exceptions management
+I create my own exceptions management to make more powerful the application likes:
+
+    BookmarkExceptionResponse.java, BookmarkIdException.java, 
+    BookmarkNotFoundException.java,BookmarkNotFoundExceptionResponse.java
+    CustomResponseEntityExceptionHandler.java, InvalidLoginResponse.java
+    UsernameAlreadyExistsException.java, UsernameAlreadyExistsResponse.java
 
   
 
-## MongoDB
-
-  
+## MongoDB Security Group
+To let people making the test locally, I whitelisted all coming addresses in the security group.
+![MongoDB SG](https://github.com/zinaLacina/mutualBookstore/blob/master/mongodbSecurity.png)
   
 
 # FRONTEND
