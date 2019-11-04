@@ -1,2 +1,4 @@
 prometheus/*
 grafana/*
+!grafana/index.yml
+!prometheus/index.yml
