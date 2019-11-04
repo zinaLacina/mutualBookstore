@@ -17,7 +17,7 @@ class Header extends Component {
     const { validToken, user } = this.props.security;
 
     const userIsAuthenticated = (
-      <div className="collapse navbar-collapse" id="mobile-nav">
+      <div className="collapse navbar-collapse" id="navbarCollapse">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link text-white font-weight-bold" to="/dashboard">
@@ -47,7 +47,7 @@ class Header extends Component {
     );
 
     const userIsNotAuthenticated = (
-      <div className="collapse navbar-collapse" id="mobile-nav">
+      <div className="collapse navbar-collapse" id="navbarCollapse">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link text-white" to="/register">
@@ -72,22 +72,15 @@ class Header extends Component {
     }
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-warning mb-4">
-        <div className="container">
-          <Link className="navbar-brand font-weight-bold text-uppercase" to="/">
+      <nav className="navbar navbar-expand-md navbar-dark bg-warning">
+        <Link className="navbar-brand font-weight-bold text-uppercase" to="/">
             Mutual Book Store
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobile-nav"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          {headerLinks}
-        </div>
-      </nav>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        {headerLinks}
+        </nav>
     );
   }
 }
