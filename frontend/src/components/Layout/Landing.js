@@ -54,8 +54,8 @@ class Landing extends Component {
               <select className="form-control mb-3"
               onChange={this.onFilter}>
                 <option value="0"> sort</option>
-                <option value="1">Descending</option>
-                <option value="0">Ascending</option>
+                <option value="1">Ascending</option>
+                <option value="0">Descending</option>
             
               </select>
             </div>

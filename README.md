@@ -29,7 +29,7 @@ The backend uses spring boot technologies. It uses Maven to execute and resolve 
 We have two different profiles for the application. Dev profile for the development, and Prod profile for the production.
 
 ## Security
-The application uses Spring security combine with JWT to secure access of the data. To bookmark a book, you need to be login first. The application will create a token that will last 30 seconds. The creation of the token is managed by the class JwtTokenProvider.java
+The application uses Spring security combine with JWT to secure access of the data. To bookmark a book, you need to be login first. The application will create a token that will last 5 minutes. The creation of the token is managed by the class JwtTokenProvider.java
 ```java
 public String generateToken(Authentication authentication){  
     UserBookstore user = (UserBookstore)authentication.getPrincipal();  
@@ -158,19 +158,22 @@ Then you can access to the application in the link below
 ## Monitoring
 After run the command docker-compose up, you should me be able to access to the different metrics of the application.
 Prometheus link is 
-
-    localhost:9090
+```bash
+localhost:9090
+```
    
 Grafana link is
 
-    localhost:3000
+```bash
+localhost:3000
+```
 
- You can find the credentials of **Grafana** inside the docker-compose file as environment variables, lines 8 and 9.  You can change and put your own. 
-  During the **CI-CD** creation, this value will be added from the environment variable of pipeline support.
+You can find the credentials of **Grafana** inside the docker-compose file as environment variables, lines 8 and 9.  You can change and put your own. 
+During the **CI-CD** creation, this value will be added from the environment variable of pipeline support.
   
- - If you are using **Gitlab** put them inside *Gitlab ci-cd setting variable* then index them inside the *docker-compose file.*
- - If you are using **AWS Codepeline**, put them inside the Codebuild environment variable. You can put also inside the *SSM parameter store*.
- - If you are using **Travis ci** put go to setting and then variables.
+- If you are using **Gitlab** put them inside *Gitlab ci-cd setting variable* then index them inside the *docker-compose file.*
+- If you are using **AWS Codepeline**, put them inside the Codebuild environment variable. You can put also inside the *SSM parameter store*.
+- If you are using **Travis ci** put go to setting and then variables.
 
 ## Deploy on aws
 
