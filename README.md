@@ -15,6 +15,10 @@ The application uses the microservice technology, we have Nginx proxy, frontend,
  - [Deployment locally and online](#deployment)
 
 This is a temporary link I will deploy a multi Docker on ECS with a configuration of Grafana, Cloudwatch [http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/](http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/)
+
+```diff
+- NB: Many variables inside my different configuration files have to be hidden and manage by environment variables, but in the purposes to avoid spending time in the configuration I opened them.
+```
  
 # APPLICATION ARCHITECTURE
   ![Architecture](https://github.com/zinaLacina/mutualBookstore/blob/master/bookstoremutual.png)
