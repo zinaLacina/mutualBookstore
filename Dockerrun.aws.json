@@ -22,7 +22,7 @@
         {
             "name": "prometheus-conf",
             "host": {
-              "sourcePath": "/var/app/current/proxy/prometheus-conf"
+              "sourcePath": "/var/app/current/prometheus-conf"
             }
         }
     ],

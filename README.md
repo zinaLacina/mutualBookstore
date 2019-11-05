@@ -27,7 +27,29 @@ The backend uses spring boot technologies. It uses Maven to execute and resolve 
 ![Database structure](https://github.com/zinaLacina/mutualBookstore/blob/master/classDiagram.png)
 ## Spring profile
 We have two different profiles for the application. Dev profile for the development, and Prod profile for the production.
+## Testing
+### Mockito For BookController Unit Test as TDD(Test Driven Development)
+Check if our search book endpoint work. This part of the code show that. When we type the value **sprin** in the search input we found items. The test method check that.
+```java
+ @Test
+    void searchBooks() throws Exception{
+        mockMvc.perform(get("/api/books/sprin").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalItems").exists());
+    }
 
+```
+### Cucumber BDD (Behavior-Driven Development)
+Cucumber aims at collaboration with non technical people.
+You can find a example of cucumber file in test/features/user.feature
+```ruby
+Feature: User management
+
+  Scenario: Retrieve user
+    When I search user 'zina'
+    Then the user is found
+    And his last fullName is 'ZINA LACINA'
+```
 ## Security
 The application uses Spring security combine with JWT to secure access of the data. To bookmark a book, you need to be login first. The application will create a token that will last 5 minutes. The creation of the token is managed by the class JwtTokenProvider.java
 ```java
