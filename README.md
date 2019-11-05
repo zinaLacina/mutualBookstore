@@ -13,6 +13,7 @@ The application uses the microservice technology, we have Nginx proxy, frontend,
  - [Backend](#backend)
  - [Frontend](#frontend)
  - [Deployment locally and online](#deployment)
+ - [Improvement](#what-next)
 
 This is a temporary link I will deploy a multi Docker on ECS with a configuration of Grafana, Cloudwatch [http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/](http://bookstore-env.exjwu6manb.us-east-1.elasticbeanstalk.com/)
 
@@ -208,5 +209,5 @@ This is a temporary link I will deploy a multi Docker on ECS with a configuratio
 
 ## CI-CD
 
-# WHAT NEXT ? 
+# WHAT NEXT 
 I can introduce **KAFKA** to stream the data coming from the Google books API, then a consumer will take the role to save to the **Books** collection. So if it happens that we don't have access anymore to the Google books API for any reason, the application will still continue to work.
